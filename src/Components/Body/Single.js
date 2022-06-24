@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import { CardImg, CardBody, CardText, CardTitle, Card, CardColumns, Button } from 'reactstrap';
+import { CardImg, CardBody, CardText, CardTitle, Card, CardColumns, Button, Form, Input } from 'reactstrap';
 
 
 class Single extends Component {
     constructor(props) {
         super(props);
-        this.state = { count: 0, cal: 5, dis: false };
+        this.state = { count: 0, cal: 5, dis: false, name: '', number: '' };
         // this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = () => {
+    handleClick = event => {
         this.setState({
             count: this.state.count + 1,
-            cal: this.state.cal - 1
+            cal: this.state.cal - 1,
+            name: '',
+            number: ''
         })
         if (this.state.cal === 0) {
             this.setState({
@@ -21,7 +23,15 @@ class Single extends Component {
             })
         }
         // console.log(this.state.count);
+        event.preventDefault();
     }
+
+    handleInputChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
 
     render() {
         return (
@@ -34,9 +44,28 @@ class Single extends Component {
                         <CardText>
                             Total Room Left: {this.state.cal}
                         </CardText>
-                        <Button disabled={this.state.dis} onClick={this.handleClick}>
-                            Reserve
-                        </Button>
+                        <Form onSubmit={this.handleClick}>
+                            <Input
+                                type="text"
+                                name="name"
+                                value={this.state.name}
+                                placeholder="Your Name"
+                                onChange={this.handleInputChange}
+                                required
+                            />
+                            <br />
+                            <Input
+                                type="text"
+                                name="number"
+                                value={this.state.number}
+                                placeholder="Pnone Number"
+                                onChange={this.handleInputChange}
+                                required
+                            />
+                            <br />
+                            <Button disabled={this.state.dis} type="submit">Reserve</Button>
+                        </Form>
+
                     </Card>
                 </div>
                 <br />
@@ -126,7 +155,7 @@ class Single extends Component {
                     </CardColumns>
                 </div>
 
-            </div>
+            </div >
         )
     }
 }
