@@ -14,4 +14,4 @@ You may also see any lint errors in the console.
 
 ### `live project link`
 
-Open [https://hotel-app-c7f6d.web.app/]
+Open [https://hotel-booking-app-1b430.web.app/]
